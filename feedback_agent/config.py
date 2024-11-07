@@ -4,10 +4,11 @@ LLM_CONFIG = {
     "api_type": "ollama",
     "num_predict": -1,
     "repeat_penalty": 1.1,
-    "seed": 42,
     "stream": False,
+    "seed": 42,
     "temperature": 1,
     "top_k": 50,
     "top_p": 0.8,
-    "native_tool_calls": False
+    "native_tool_calls": False,
+    "cache_seed": None,
 }

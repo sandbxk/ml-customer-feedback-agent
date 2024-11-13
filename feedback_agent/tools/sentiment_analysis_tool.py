@@ -5,6 +5,7 @@ from feedback_agent.config import LLM_CONFIG
 
 SENTIMENT_VALUES = {"positive", "negative", "neutral"}
 
+
 def sentiment_analysis(text: Annotated[List[str], "A list of strings"]) -> Annotated[List[int], "A list of integers"]:
     if not isinstance(text, list):
         raise ValueError("Input must be a list. It is currently a " + str(type(text)))
@@ -34,7 +35,7 @@ def sentiment_analysis(text: Annotated[List[str], "A list of strings"]) -> Annot
             "native_tool_calls": False,
             "cache_seed": None,
         },
-    )    
+    )
     user_proxy = UserProxyAgent(
         name="User",
         llm_config=False,
@@ -65,7 +66,7 @@ def sentiment_analysis(text: Annotated[List[str], "A list of strings"]) -> Annot
     reply_value = reply_value.replace("\nFINISH", "").strip()
 
     # extract the sentiment list string from the reply
-    reply_value = reply_value[reply_value.find("[") : reply_value.find("]") + 1]
+    reply_value = reply_value[reply_value.find("["): reply_value.find("]") + 1]
     if reply_value[0] == "[" and reply_value[-1] == "]":
         reply_value = ast.literal_eval(reply_value)
         reply_value = [int(value) for value in reply_value]
